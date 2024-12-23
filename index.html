@@ -26,6 +26,48 @@
       <button class="navbar-toggler" data-bs-toggle="offcanvas" data-bs-target="#menu">
         <span class="navbar-toggler-icon"></span>
       </button>
+      <!-- New book modal -->
+      <div class="modal fade" id="newBookForm">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <!-- Menu heading -->
+              <span class="modal-title fs-1">New Book</span>
+              <!-- Close button -->
+              <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+              <!-- New book form -->
+              <form>
+                <!-- Title -->
+                <div class="form-floating mb-3">
+                  <input type="text" class="form-control" placeholder="">
+                  <label for="title">Title</label>
+                </div>
+                <!-- Author -->
+                <div class="form-floating mb-3">
+                  <input type="text" class="form-control" placeholder="">
+                  <label for="author">Author</label>
+                </div>
+                <!-- Pages -->
+                <div class="form-floating mb-3">
+                  <input type="number" class="form-control" placeholder="">
+                  <label for="pages">Pages</label>
+                </div>
+                <!-- Completed -->
+                <div class="form-check mb-3">
+                  <input type="checkbox" class="form-check-input" id="completed">
+                  <label class="form-check-label" for="completed">Completed</label>
+                </div>
+              </form>
+            </div>
+            <!-- Submit button -->
+            <div class="modal-footer">
+              <button type="submit" class="btn btn-primary">Add</button>
+            </div>
+          </div>
+        </div>
+      </div>
       <!-- Menu modal -->
       <div class="offcanvas offcanvas-end" id="menu">
         <div class="offcanvas-header">
