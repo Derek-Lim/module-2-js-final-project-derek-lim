@@ -11,11 +11,11 @@ function addBookToLibrary(title, author, pages, read) {
   myLibrary.push(new Book(title, author, pages, read))
 }
 
-function displayBooks() {
+function updateBookDisplay() {
   const cardsContainer = document.getElementById('cards-container')
   cardsContainer.innerHTML = ''
 
-  myLibrary.forEach(book => {
+  myLibrary.forEach((book, index) => {
     const cardContainer = document.createElement('div')
     cardContainer.classList.add('col')
     cardsContainer.appendChild(cardContainer)
@@ -80,7 +80,9 @@ function displayBooks() {
 
     const removeBtn = document.createElement('button')
     removeBtn.classList.add('btn', 'btn-danger')
+    removeBtn.setAttribute('id', index)
     removeBtn.textContent = 'Remove'
+    removeBtn.addEventListener('click', removeBook)
     cardFooter.appendChild(removeBtn)
   })
 }
@@ -104,7 +106,12 @@ function submitNewBook(e) {
   modal = bootstrap.Modal.getInstance(newBookModal)
   modal.hide()
 
-  displayBooks()
+  updateBookDisplay()
+}
+
+function removeBook(e) {
+  myLibrary.splice(e.target.id, 1)
+  updateBookDisplay()
 }
 
 document.getElementById('new-book-form')
@@ -135,4 +142,4 @@ addBookToLibrary(
   true
 )
 
-displayBooks()
+updateBookDisplay()
