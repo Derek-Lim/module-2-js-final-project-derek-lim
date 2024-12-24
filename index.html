@@ -21,13 +21,13 @@
         <input class="form-control" placeholder="Search">
       </form>
       <!-- Add book button -->
-      <button class="btn btn-lg btn-dark rounded-circle mx-2" data-bs-toggle="modal" data-bs-target="#newBookForm">+</button>
+      <button class="btn btn-lg btn-dark rounded-circle mx-2" data-bs-toggle="modal" data-bs-target="#new-book-modal">+</button>
       <!-- Menu icon -->
       <button class="navbar-toggler" data-bs-toggle="offcanvas" data-bs-target="#menu">
         <span class="navbar-toggler-icon"></span>
       </button>
       <!-- New book modal -->
-      <div class="modal fade" id="newBookForm">
+      <div class="modal fade" id="new-book-modal">
         <div class="modal-dialog modal-dialog-centered">
           <div class="modal-content">
             <div class="modal-header">
@@ -38,32 +38,32 @@
             </div>
             <div class="modal-body">
               <!-- New book form -->
-              <form>
+              <form id="new-book-form">
                 <!-- Title -->
                 <div class="form-floating mb-3">
-                  <input type="text" class="form-control" placeholder="">
-                  <label for="title">Title</label>
+                  <input type="text" id="title-add" class="form-control" placeholder="">
+                  <label for="title-add">Title</label>
                 </div>
                 <!-- Author -->
                 <div class="form-floating mb-3">
-                  <input type="text" class="form-control" placeholder="">
-                  <label for="author">Author</label>
+                  <input type="text" id="author-add" class="form-control" placeholder="">
+                  <label for="author-add">Author</label>
                 </div>
                 <!-- Pages -->
                 <div class="form-floating mb-3">
-                  <input type="number" class="form-control" placeholder="">
-                  <label for="pages">Pages</label>
+                  <input type="number" id="pages-add" class="form-control" placeholder="">
+                  <label for="pages-add">Pages</label>
                 </div>
                 <!-- Completed -->
                 <div class="form-check mb-3">
-                  <input type="checkbox" class="form-check-input" id="completed">
-                  <label class="form-check-label" for="completed">Completed</label>
+                  <input type="checkbox" class="form-check-input" id="completed-add">
+                  <label class="form-check-label" for="completed-add">Completed</label>
+                </div>
+                <!-- Submit button -->
+                <div class="d-grid col-6 mx-auto mt-4">
+                  <button type="submit" class="btn btn-primary">Add</button>
                 </div>
               </form>
-            </div>
-            <!-- Submit button -->
-            <div class="modal-footer">
-              <button type="submit" class="btn btn-primary">Add</button>
             </div>
           </div>
         </div>
@@ -140,7 +140,7 @@
       <div class="row row-cols-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5 row-cols-xxl-6 g-4" id="cards-container"></div>
     </div>
     <!-- Edit book modal -->
-    <div class="modal fade" id="editBook">
+    <div class="modal fade" id="edit-book-modal">
       <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
           <div class="modal-header">
@@ -150,33 +150,33 @@
             <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
           </div>
           <div class="modal-body">
-            <!-- New book form -->
-            <form>
+            <!-- Edit book form -->
+            <form id="edit-book-form">
               <!-- Title -->
               <div class="form-floating mb-3">
-                <input type="text" class="form-control" placeholder="">
-                <label for="title">Title</label>
+                <input type="text" id="title-edit" class="form-control" placeholder="">
+                <label for="title-edit">Title</label>
               </div>
               <!-- Author -->
               <div class="form-floating mb-3">
-                <input type="text" class="form-control" placeholder="">
-                <label for="author">Author</label>
+                <input type="text" id="author-edit" class="form-control" placeholder="">
+                <label for="author-edit">Author</label>
               </div>
               <!-- Pages -->
               <div class="form-floating mb-3">
-                <input type="number" class="form-control" placeholder="">
-                <label for="pages">Pages</label>
+                <input type="number" id="pages-edit" class="form-control" placeholder="">
+                <label for="pages-edit">Pages</label>
               </div>
               <!-- Completed -->
               <div class="form-check mb-3">
-                <input type="checkbox" class="form-check-input" id="completed">
-                <label class="form-check-label" for="completed">Completed</label>
+                <input type="checkbox" class="form-check-input" id="completed-edit">
+                <label class="form-check-label" for="completed-edit">Completed</label>
+              </div>
+              <!-- Submit button -->
+              <div class="d-grid col-6 mx-auto mt-4">
+                <button type="submit" class="btn btn-primary">Confirm</button>
               </div>
             </form>
-          </div>
-          <!-- Submit button -->
-          <div class="modal-footer">
-            <button type="submit" class="btn btn-primary">Confirm</button>
           </div>
         </div>
       </div>

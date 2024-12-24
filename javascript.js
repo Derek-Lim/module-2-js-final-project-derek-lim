@@ -12,9 +12,10 @@ function addBookToLibrary(title, author, pages, read) {
 }
 
 function displayBooks() {
-  myLibrary.forEach(book => {
-    const cardsContainer = document.getElementById('cards-container')
+  const cardsContainer = document.getElementById('cards-container')
+  cardsContainer.innerHTML = ''
 
+  myLibrary.forEach(book => {
     const cardContainer = document.createElement('div')
     cardContainer.classList.add('col')
     cardsContainer.appendChild(cardContainer)
@@ -73,7 +74,7 @@ function displayBooks() {
     const editBtn = document.createElement('button')
     editBtn.classList.add('btn', 'btn-warning')
     editBtn.setAttribute('data-bs-toggle', 'modal')
-    editBtn.setAttribute('data-bs-target', '#editBook')
+    editBtn.setAttribute('data-bs-target', '#edit-book-modal')
     editBtn.textContent = 'Edit'
     cardFooter.appendChild(editBtn)
 
@@ -83,6 +84,31 @@ function displayBooks() {
     cardFooter.appendChild(removeBtn)
   })
 }
+
+function submitNewBook(e) {
+  e.preventDefault()
+
+  const newBookModal = document.getElementById('new-book-modal')
+  const title = document.getElementById('title-add')
+  const author = document.getElementById('author-add')
+  const pages = document.getElementById('pages-add')
+  const completed = document.getElementById('completed-add')
+
+  addBookToLibrary(title.value, author.value, pages.value, completed.checked)
+
+  title.value = ''
+  author.value = ''
+  pages.value = ''
+  completed.checked = false
+
+  modal = bootstrap.Modal.getInstance(newBookModal)
+  modal.hide()
+
+  displayBooks()
+}
+
+document.getElementById('new-book-form')
+.addEventListener('submit', submitNewBook)
 
 addBookToLibrary(
   'The Pragmatic Programmer',
