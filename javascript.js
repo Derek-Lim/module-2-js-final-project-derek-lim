@@ -75,12 +75,14 @@ function updateBookDisplay() {
     editBtn.classList.add('btn', 'btn-warning')
     editBtn.setAttribute('data-bs-toggle', 'modal')
     editBtn.setAttribute('data-bs-target', '#edit-book-modal')
+    editBtn.setAttribute('id', `edit-${index}`)
     editBtn.textContent = 'Edit'
+    editBtn.addEventListener('click', updateBookToEdit)
     cardFooter.appendChild(editBtn)
 
     const removeBtn = document.createElement('button')
     removeBtn.classList.add('btn', 'btn-danger')
-    removeBtn.setAttribute('id', index)
+    removeBtn.setAttribute('id', `remove-${index}`)
     removeBtn.textContent = 'Remove'
     removeBtn.addEventListener('click', removeBook)
     cardFooter.appendChild(removeBtn)
@@ -103,19 +105,49 @@ function submitNewBook(e) {
   pages.value = ''
   completed.checked = false
 
-  modal = bootstrap.Modal.getInstance(newBookModal)
-  modal.hide()
+  bootstrap.Modal.getInstance(newBookModal).hide()
+
+  updateBookDisplay()
+}
+
+let bookToEdit
+
+function updateBookToEdit(e) {
+  bookToEdit = myLibrary[e.target.id.charAt(e.target.id.length - 1)]
+}
+
+function editBook(e) {
+  e.preventDefault()
+
+  const editBookModal = document.getElementById('edit-book-modal')
+  const title = document.getElementById('title-edit')
+  const author = document.getElementById('author-edit')
+  const pages = document.getElementById('pages-edit')
+  const completed = document.getElementById('completed-edit')
+
+  bookToEdit.title = title.value
+  bookToEdit.author = author.value
+  bookToEdit.pages = pages.value
+  bookToEdit.completed = completed.checked
+
+  title.value = ''
+  author.value = ''
+  pages.value = ''
+  completed.checked = false
+
+  bootstrap.Modal.getInstance(editBookModal).hide()
 
   updateBookDisplay()
 }
 
 function removeBook(e) {
-  myLibrary.splice(e.target.id, 1)
+  myLibrary.splice(e.target.id.charAt(e.target.id.length - 1), 1)
   updateBookDisplay()
 }
 
 document.getElementById('new-book-form')
 .addEventListener('submit', submitNewBook)
+document.getElementById('edit-book-form').addEventListener('submit', editBook)
 
 addBookToLibrary(
   'The Pragmatic Programmer',
