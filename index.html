@@ -136,51 +136,7 @@
   </nav>
   <!-- Cards -->
   <section class="bg-dark p-3 mb-4">
-    <div class="container-fluid">
-      <div class="row row-cols-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5 row-cols-xxl-6 g-4" id="cards-container"></div>
-    </div>
-    <!-- Edit book modal -->
-    <div class="modal fade" id="edit-book-modal">
-      <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-          <div class="modal-header">
-            <!-- Menu heading -->
-            <span class="modal-title fs-1">Edit</span>
-            <!-- Close button -->
-            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-          </div>
-          <div class="modal-body">
-            <!-- Edit book form -->
-            <form id="edit-book-form">
-              <!-- Title -->
-              <div class="form-floating mb-3">
-                <input type="text" id="title-edit" class="form-control" placeholder="">
-                <label for="title-edit">Title</label>
-              </div>
-              <!-- Author -->
-              <div class="form-floating mb-3">
-                <input type="text" id="author-edit" class="form-control" placeholder="">
-                <label for="author-edit">Author</label>
-              </div>
-              <!-- Pages -->
-              <div class="form-floating mb-3">
-                <input type="number" id="pages-edit" class="form-control" placeholder="">
-                <label for="pages-edit">Pages</label>
-              </div>
-              <!-- Completed -->
-              <div class="form-check mb-3">
-                <input type="checkbox" class="form-check-input" id="completed-edit">
-                <label class="form-check-label" for="completed-edit">Completed</label>
-              </div>
-              <!-- Submit button -->
-              <div class="d-grid col-6 mx-auto mt-4">
-                <button type="submit" class="btn btn-primary">Confirm</button>
-              </div>
-            </form>
-          </div>
-        </div>
-      </div>
-    </div>
+    <div class="container-fluid" id="container"></div>
   </section>
   <!-- Footer -->
   <footer class="bg-white text-center fixed-bottom fw-bold p-1">
