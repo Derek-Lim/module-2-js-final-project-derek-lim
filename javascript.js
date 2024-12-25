@@ -32,6 +32,25 @@ function updateBookDisplay() {
   })
 }
 
+function updateMenu() {
+  const bookCount = document.getElementById('book-count')
+  const completedCount = document.getElementById('completed-count')
+  const pageCount = document.getElementById('page-count')
+  const progressBar = document.querySelector('.progress-bar')
+  const completedLibrary = myLibrary.filter(book => book.read)
+  const totalPages = myLibrary.reduce((totalPages, book) =>
+    totalPages + book.pages, 0
+  )
+  const completedPages = completedLibrary.reduce((totalPages, book) =>
+    totalPages + book.pages, 0
+  )
+  
+  bookCount.textContent = myLibrary.length
+  completedCount.textContent = completedLibrary.length
+  pageCount.textContent = completedPages + '/' + totalPages
+  progressBar.style.width = `${(completedPages/totalPages) * 100}%`
+}
+
 function createCard(cardsContainer, book, index) {
   const cardContainer = document.createElement('div')
   cardContainer.classList.add('col')
@@ -229,7 +248,7 @@ function submitNewBook(e) {
   const pages = document.getElementById('pages-add')
   const completed = document.getElementById('completed-add')
 
-  addBookToLibrary(title.value, author.value, pages.value, completed.checked)
+  addBookToLibrary(title.value, author.value, +pages.value, completed.checked)
 
   title.value = ''
   author.value = ''
@@ -239,6 +258,7 @@ function submitNewBook(e) {
   bootstrap.Modal.getInstance(newBookModal).hide()
 
   updateBookDisplay()
+  updateMenu()
 }
 
 function editBook(e) {
@@ -253,7 +273,7 @@ function editBook(e) {
 
   myLibrary[index].title = title.value
   myLibrary[index].author = author.value
-  myLibrary[index].pages = pages.value
+  myLibrary[index].pages = +pages.value
   myLibrary[index].read = completed.checked
 
   title.value = ''
@@ -264,11 +284,13 @@ function editBook(e) {
   bootstrap.Modal.getInstance(editBookModal).hide()
 
   updateBookDisplay()
+  updateMenu()
 }
 
 function removeBook(e) {
   myLibrary.splice(e.target.id.charAt(e.target.id.length - 1), 1)
   updateBookDisplay()
+  updateMenu()
 }
 
 function initialRender() {
@@ -301,6 +323,7 @@ function initialRender() {
   )
   
   updateBookDisplay()
+  updateMenu()
 }
 
 initialRender()
