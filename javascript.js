@@ -28,7 +28,7 @@ function updateBookDisplay() {
   
   myLibrary.forEach((book, index) => {
     createCard(cardsContainer, book, index)
-    createEditModal(container, index)
+    createEditModal(container, book, index)
   })
 }
 
@@ -104,7 +104,7 @@ function createCard(cardsContainer, book, index) {
   cardFooter.appendChild(removeBtn)
 }
 
-function createEditModal(container, index) {
+function createEditModal(container, book, index) {
   const modal = document.createElement('div')
   modal.classList.add('modal', 'fade')
   modal.setAttribute('id', `edit-book-modal-${index}`)
@@ -150,6 +150,7 @@ function createEditModal(container, index) {
   titleInput.setAttribute('type', 'text')
   titleInput.setAttribute('id', `title-edit-${index}`)
   titleInput.setAttribute('placeholder', '')
+  titleInput.setAttribute('value', book.title)
   titleContainer.appendChild(titleInput)
 
   const titleLabel = document.createElement('label')
@@ -166,6 +167,7 @@ function createEditModal(container, index) {
   authorInput.setAttribute('type', 'text')
   authorInput.setAttribute('id', `author-edit-${index}`)
   authorInput.setAttribute('placeholder', '')
+  authorInput.setAttribute('value', book.author)
   authorContainer.appendChild(authorInput)
 
   const authorLabel = document.createElement('label')
@@ -182,6 +184,7 @@ function createEditModal(container, index) {
   pagesInput.setAttribute('type', 'number')
   pagesInput.setAttribute('id', `pages-edit-${index}`)
   pagesInput.setAttribute('placeholder', '')
+  pagesInput.setAttribute('value', book.pages)
   pagesContainer.appendChild(pagesInput)
 
   const pagesLabel = document.createElement('label')
@@ -197,6 +200,7 @@ function createEditModal(container, index) {
   completedInput.classList.add('form-check-input')
   completedInput.setAttribute('type', 'checkbox')
   completedInput.setAttribute('id', `completed-edit-${index}`)
+  if (book.read) completedInput.setAttribute('checked', '')
   completedContainer.appendChild(completedInput)
 
   const completedLabel = document.createElement('label')
