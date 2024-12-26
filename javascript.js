@@ -94,13 +94,15 @@ function createCard(cardsContainer, book, index) {
   cardHeader.classList.add('card-header')
   card.appendChild(cardHeader)
 
-  const completeStatus = document.createElement('button')
-  completeStatus.classList.add(
+  const completeBtn = document.createElement('button')
+  completeBtn.classList.add(
     'btn',
     `${book.read ? 'btn-success' : 'btn-secondary'}`
   )
-  completeStatus.textContent = `${book.read ? 'Completed' : 'Not Completed'}`
-  cardHeader.appendChild(completeStatus)
+  completeBtn.setAttribute('id', `complete-${index}`)
+  completeBtn.textContent = `${book.read ? 'Completed' : 'Not Completed'}`
+  completeBtn.addEventListener('click', toggleComplete)
+  cardHeader.appendChild(completeBtn)
 
   const cardBody = document.createElement('div')
   cardBody.classList.add('card-body')
@@ -280,6 +282,14 @@ function submitNewBook(e) {
   completed.checked = false
 
   bootstrap.Modal.getInstance(newBookModal).hide()
+
+  updateBookDisplay()
+  updateMenu()
+}
+
+function toggleComplete(e) {
+  const index = e.target.id.charAt(e.target.id.length - 1)
+  myLibrary[index].read = myLibrary[index].read ? false : true
 
   updateBookDisplay()
   updateMenu()
