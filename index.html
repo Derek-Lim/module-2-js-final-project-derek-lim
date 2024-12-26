@@ -41,17 +41,17 @@
               <form id="new-book-form">
                 <!-- Title -->
                 <div class="form-floating mb-3">
-                  <input type="text" id="title-add" class="form-control" placeholder="">
+                  <input type="text" id="title-add" class="form-control" placeholder="" required>
                   <label for="title-add">Title</label>
                 </div>
                 <!-- Author -->
                 <div class="form-floating mb-3">
-                  <input type="text" id="author-add" class="form-control" placeholder="">
+                  <input type="text" id="author-add" class="form-control" placeholder="" required>
                   <label for="author-add">Author</label>
                 </div>
                 <!-- Pages -->
                 <div class="form-floating mb-3">
-                  <input type="number" id="pages-add" class="form-control" placeholder="">
+                  <input type="number" id="pages-add" class="form-control" placeholder="" required  min="5" max="5000">
                   <label for="pages-add">Pages</label>
                 </div>
                 <!-- Completed -->

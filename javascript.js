@@ -196,6 +196,7 @@ function createEditModal(container, book, index) {
   titleInput.setAttribute('id', `title-edit-${index}`)
   titleInput.setAttribute('placeholder', '')
   titleInput.setAttribute('value', book.title)
+  titleInput.setAttribute('required', '')
   titleContainer.appendChild(titleInput)
 
   const titleLabel = document.createElement('label')
@@ -213,6 +214,7 @@ function createEditModal(container, book, index) {
   authorInput.setAttribute('id', `author-edit-${index}`)
   authorInput.setAttribute('placeholder', '')
   authorInput.setAttribute('value', book.author)
+  authorInput.setAttribute('required', '')
   authorContainer.appendChild(authorInput)
 
   const authorLabel = document.createElement('label')
@@ -230,6 +232,9 @@ function createEditModal(container, book, index) {
   pagesInput.setAttribute('id', `pages-edit-${index}`)
   pagesInput.setAttribute('placeholder', '')
   pagesInput.setAttribute('value', book.pages)
+  pagesInput.setAttribute('required', '')
+  pagesInput.setAttribute('min', 5)
+  pagesInput.setAttribute('max', 5000)
   pagesContainer.appendChild(pagesInput)
 
   const pagesLabel = document.createElement('label')
