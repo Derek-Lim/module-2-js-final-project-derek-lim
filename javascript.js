@@ -30,6 +30,7 @@ function updateBookDisplay() {
       'row-cols-xxl-6',
       'g-4'
     )
+    cardsContainer.setAttribute('id', 'cards-container')
     container.appendChild(cardsContainer)
 
     myLibrary.forEach((book, index) => {
@@ -346,11 +347,30 @@ function removeAllBooks() {
   updateBookDisplay()
 }
 
+function filterBooks(e) {
+  const cardsContainer = document.getElementById('cards-container')
+
+  for (const card of cardsContainer.children) {
+    const text = e.target.value.toLowerCase()
+    const title = card.querySelector('.card-title').textContent
+    const author = card.querySelector('.card-subtitle').textContent
+    
+    if (title.toLowerCase().indexOf(text) !== -1 ||
+        author.toLowerCase().indexOf(text) !== -1) {
+      card.style.display = 'block'
+    } else {
+      card.style.display = 'none'
+    }
+  }
+}
+
 function initialRender() {
   const newBookForm = document.getElementById('new-book-form')
   newBookForm.addEventListener('submit', submitNewBook)
   const resetBtn = document.getElementById('reset-btn')
   resetBtn.addEventListener('click', removeAllBooks)
+  const searchBar = document.getElementById('search-bar')
+  searchBar.addEventListener('input', filterBooks)
   
   addBookToLibrary(
     'The Pragmatic Programmer',
