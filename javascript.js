@@ -43,7 +43,7 @@ function updateMenu() {
   const bookCount = document.getElementById('book-count')
   const completedCount = document.getElementById('completed-count')
   const pageCount = document.getElementById('page-count')
-  const progressBar = document.querySelector('.progress-bar')
+  const progressContainer = document.getElementById('progress-container')
   const completedLibrary = myLibrary.filter(book => book.read)
   const totalPages = myLibrary.reduce((totalPages, book) =>
     totalPages + book.pages, 0
@@ -51,11 +51,28 @@ function updateMenu() {
   const completedPages = completedLibrary.reduce((totalPages, book) =>
     totalPages + book.pages, 0
   )
-  
+
   bookCount.textContent = myLibrary.length
   completedCount.textContent = completedLibrary.length
-  pageCount.textContent = completedPages + '/' + totalPages
-  progressBar.style.width = `${(completedPages/totalPages) * 100}%`
+  pageCount.textContent = completedPages.toLocaleString() +'/' +
+                          totalPages.toLocaleString()
+  progressContainer.innerHTML = ''
+
+  if (!(completedPages === 0 && totalPages === 0)) {
+    const progress = document.createElement('div')
+    progress.classList.add('progress')
+    progressContainer.appendChild(progress)
+
+    const progressBar = document.createElement('div')
+    progressBar.classList.add(
+      'progress-bar',
+      'progress-bar-striped',
+      'progress-bar-animated',
+      'bg-success'
+    )
+    progressBar.style.width = `${(completedPages/totalPages) * 100}%`
+    progress.appendChild(progressBar)
+  }
 }
 
 function createCard(cardsContainer, book, index) {
@@ -296,6 +313,7 @@ function editBook(e) {
 
 function removeBook(e) {
   myLibrary.splice(e.target.id.charAt(e.target.id.length - 1), 1)
+
   updateBookDisplay()
   updateMenu()
 }
