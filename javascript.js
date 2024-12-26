@@ -13,23 +13,30 @@ function addBookToLibrary(title, author, pages, read) {
 
 function updateBookDisplay() {
   const container = document.getElementById('container')
+  container.className = 'container-fluid'
   container.innerHTML = ''
-  const cardsContainer = document.createElement('div')
-  cardsContainer.classList.add(
-    'row',
-    'row-cols-2',
-    'row-cols-md-3',
-    'row-cols-lg-4',
-    'row-cols-xl-5',
-    'row-cols-xxl-6',
-    'g-4'
-  )
-  container.appendChild(cardsContainer)
-  
-  myLibrary.forEach((book, index) => {
-    createCard(cardsContainer, book, index)
-    createEditModal(container, book, index)
-  })
+
+  if (myLibrary.length === 0) {
+    container.classList.add('text-white', 'text-center', 'fs-1')
+    container.textContent = 'No books to show.'
+  } else {
+    const cardsContainer = document.createElement('div')
+    cardsContainer.classList.add(
+      'row',
+      'row-cols-2',
+      'row-cols-md-3',
+      'row-cols-lg-4',
+      'row-cols-xl-5',
+      'row-cols-xxl-6',
+      'g-4'
+    )
+    container.appendChild(cardsContainer)
+
+    myLibrary.forEach((book, index) => {
+      createCard(cardsContainer, book, index)
+      createEditModal(container, book, index)
+    })
+  }
 }
 
 function updateMenu() {
