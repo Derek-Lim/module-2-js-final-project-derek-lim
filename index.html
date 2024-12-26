@@ -34,7 +34,7 @@
               <!-- Menu heading -->
               <span class="modal-title fs-1">New Book</span>
               <!-- Close button -->
-              <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+              <button class="btn-close" data-bs-dismiss="modal"></button>
             </div>
             <div class="modal-body">
               <!-- New book form -->
@@ -129,7 +129,25 @@
         <hr>
         <!-- Reset button -->
         <div class="offcanvas-footer mx-3 mb-3">
-          <button class="btn btn-danger">Erase All</button>
+          <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#confirm-reset">Erase All</button>
+        </div>
+        <!-- Modal -->
+        <div class="modal fade" data-bs-backdrop="static" id="confirm-reset">
+          <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+              <div class="modal-header text-center" style="margin: 0 auto;">
+                <span class="modal-title fs-1 fw-bold">Clear Library</span>
+              </div>
+              <div class="modal-body text-center">
+                <div class="fs-4 mb-2">Delete all existing books in library?</div>
+                <div class="text-secondary">You cannot undo this action.</div>
+              </div>
+              <div class="modal-footer" style="margin: 0 auto;">
+                <button class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button class="btn btn-danger" id="reset-btn">Confirm</button>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>

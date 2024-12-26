@@ -293,9 +293,24 @@ function removeBook(e) {
   updateMenu()
 }
 
+function removeAllBooks() {
+  const menu = document.getElementById('menu')
+  const confirmResetModal = document.getElementById('confirm-reset')
+
+  bootstrap.Offcanvas.getInstance(menu).hide()
+  bootstrap.Modal.getInstance(confirmResetModal).hide()
+  
+  while (myLibrary.length > 0) myLibrary.pop()
+
+  updateMenu()
+  updateBookDisplay()
+}
+
 function initialRender() {
   const newBookForm = document.getElementById('new-book-form')
   newBookForm.addEventListener('submit', submitNewBook)
+  const resetBtn = document.getElementById('reset-btn')
+  resetBtn.addEventListener('click', removeAllBooks)
   
   addBookToLibrary(
     'The Pragmatic Programmer',
