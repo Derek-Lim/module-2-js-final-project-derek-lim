@@ -13,14 +13,14 @@ function addBookToLibrary(title, author, pages, read) {
 
 function updateBookDisplay() {
   const container = document.getElementById('container')
+  const cardsContainer = document.createElement('div')
   container.className = 'container-fluid'
   container.innerHTML = ''
 
   if (myLibrary.length === 0) {
     container.classList.add('text-white', 'text-center', 'fs-1')
-    container.textContent = 'No books to show.'
+    container.textContent = 'Library is empty.'
   } else {
-    const cardsContainer = document.createElement('div')
     cardsContainer.classList.add(
       'row',
       'row-cols-2',
@@ -37,6 +37,19 @@ function updateBookDisplay() {
       createCard(cardsContainer, book, index)
       createEditModal(container, book, index)
     })
+
+    filterBooks()
+
+    let booksDisplayStatus = []
+    for (let i = 0; i < cardsContainer.children.length; i++) {
+      booksDisplayStatus.push(
+        cardsContainer.children[i].style.display === 'none' ? false : true
+      )
+    }
+    if (booksDisplayStatus.every(book => !book)) {
+      container.classList.add('text-white', 'text-center', 'fs-1')
+      container.textContent = 'No books to show.'
+    }
   }
 }
 
@@ -347,7 +360,7 @@ function removeAllBooks() {
   updateBookDisplay()
 }
 
-function filterBooks(e) {
+function searchBooks(e) {
   const cardsContainer = document.getElementById('cards-container')
 
   for (const card of cardsContainer.children) {
@@ -364,13 +377,57 @@ function filterBooks(e) {
   }
 }
 
+function updateActive(menu, e) {
+  for (const item of menu.children) {
+    item.firstElementChild.classList.remove('active')
+  }
+  e.target.classList.add('active')
+
+  updateBookDisplay()
+}
+
+function filterBooks() {
+  const cardsContainer = document.getElementById('cards-container')
+  const filterMenu = document.getElementById('filter-menu')
+  const active = filterMenu.querySelector('.active').id
+
+  if (active === 'read') {
+    const unreadIndexes = []
+    myLibrary.forEach((book, index) => {
+      if (!book.read) {
+        unreadIndexes.push(index)
+      }
+    })
+    unreadIndexes.forEach(i => {
+      cardsContainer.children[i].style.display = 'none'
+    })
+  } else if (active === 'unread') {
+    const readIndexes = []
+    myLibrary.forEach((book, index) => {
+      if (book.read) {
+        readIndexes.push(index)
+      }
+    })
+    readIndexes.forEach(i => {
+      cardsContainer.children[i].style.display = 'none'
+    })
+  }
+}
+
 function initialRender() {
   const newBookForm = document.getElementById('new-book-form')
   newBookForm.addEventListener('submit', submitNewBook)
   const resetBtn = document.getElementById('reset-btn')
   resetBtn.addEventListener('click', removeAllBooks)
   const searchBar = document.getElementById('search-bar')
-  searchBar.addEventListener('input', filterBooks)
+  searchBar.addEventListener('input', searchBooks)
+  const filterMenu = document.getElementById('filter-menu')
+  for (const item of filterMenu.children) {
+    item.firstElementChild.addEventListener(
+      'click', 
+      updateActive.bind(this, filterMenu)
+    )
+  }
   
   addBookToLibrary(
     'The Pragmatic Programmer',

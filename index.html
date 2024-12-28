@@ -98,26 +98,15 @@
             <!-- Progress bar for pages read -->
             <li id="progress-container"></li>
             <li><hr></li>
-            <!-- Arrangement dropdown -->
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
-                Arrange by
-              </a>
-              <ul class="dropdown-menu">
-                <li><a class="dropdown-item active">Insertion order (default)</a></li>
-                <li><a class="dropdown-item">Alphabet</a></li>
-                <li><a class="dropdown-item">Page length</a></li>
-              </ul>
-            </li>
             <!-- Filter dropdown -->
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
                 Filter
               </a>
-              <ul class="dropdown-menu">
-                <li><a class="dropdown-item active">Show all (default)</a></li>
-                <li><a class="dropdown-item">Show completed</a></li>
-                <li><a class="dropdown-item">Show unread</a></li>
+              <ul class="dropdown-menu" id="filter-menu">
+                <li><a class="dropdown-item active" id="all">Show all (default)</a></li>
+                <li><a class="dropdown-item" id="read">Show completed</a></li>
+                <li><a class="dropdown-item" id="unread">Show unread</a></li>
               </ul>
             </li>
             <li><hr></li>
