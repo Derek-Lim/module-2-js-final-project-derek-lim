@@ -116,6 +116,7 @@ function createCard(cardsContainer, book, index) {
   completeBtn.setAttribute('id', `complete-${index}`)
   completeBtn.textContent = `${book.read ? 'Completed' : 'Not Completed'}`
   completeBtn.addEventListener('click', toggleComplete)
+  completeBtn.addEventListener('click', searchBooks)
   cardHeader.appendChild(completeBtn)
 
   const cardBody = document.createElement('div')
@@ -160,6 +161,7 @@ function createCard(cardsContainer, book, index) {
   removeBtn.setAttribute('id', `remove-${index}`)
   removeBtn.textContent = 'Remove'
   removeBtn.addEventListener('click', removeBook)
+  removeBtn.addEventListener('click', searchBooks)
   cardFooter.appendChild(removeBtn)
 }
 
@@ -198,6 +200,7 @@ function createEditModal(container, book, index) {
   const form = document.createElement('form')
   form.setAttribute('id', `edit-book-form-${index}`)
   form.addEventListener('submit', editBook)
+  form.addEventListener('submit', clearSearchBar)
   modalBody.appendChild(form)
 
   const titleContainer = document.createElement('div')
@@ -360,11 +363,11 @@ function removeAllBooks() {
   updateBookDisplay()
 }
 
-function searchBooks(e) {
+function searchBooks() {
   const cardsContainer = document.getElementById('cards-container')
 
   for (const card of cardsContainer.children) {
-    const text = e.target.value.toLowerCase()
+    const text = document.getElementById('search-bar').value
     const title = card.querySelector('.card-title').textContent
     const author = card.querySelector('.card-subtitle').textContent
     
@@ -375,6 +378,8 @@ function searchBooks(e) {
       card.style.display = 'none'
     }
   }
+
+  filterBooks()
 }
 
 function updateActive(menu, e) {
@@ -414,13 +419,23 @@ function filterBooks() {
   }
 }
 
+function clearSearchBar() {
+  const searchBar = document.getElementById('search-bar')
+  searchBar.value = ''
+}
+
 function initialRender() {
   const newBookForm = document.getElementById('new-book-form')
   newBookForm.addEventListener('submit', submitNewBook)
+  newBookForm.addEventListener('submit', clearSearchBar)
+
   const resetBtn = document.getElementById('reset-btn')
   resetBtn.addEventListener('click', removeAllBooks)
+  resetBtn.addEventListener('click', clearSearchBar)
+
   const searchBar = document.getElementById('search-bar')
   searchBar.addEventListener('input', searchBooks)
+
   const filterMenu = document.getElementById('filter-menu')
   for (const item of filterMenu.children) {
     item.firstElementChild.addEventListener(
@@ -428,6 +443,7 @@ function initialRender() {
       updateActive.bind(this, filterMenu)
     )
   }
+  filterMenu.addEventListener('click', clearSearchBar)
   
   addBookToLibrary(
     'The Pragmatic Programmer',
