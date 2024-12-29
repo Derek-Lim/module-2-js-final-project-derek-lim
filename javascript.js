@@ -296,17 +296,24 @@ function submitNewBook(e) {
   const pages = document.getElementById('pages-add')
   const completed = document.getElementById('completed-add')
 
-  addBookToLibrary(title.value, author.value, +pages.value, completed.checked)
-
-  title.value = ''
-  author.value = ''
-  pages.value = ''
-  completed.checked = false
-
-  bootstrap.Modal.getInstance(newBookModal).hide()
-
-  updateBookDisplay()
-  updateMenu()
+  if (myLibrary.filter(
+    book => book.title.toLowerCase() === title.value.toLowerCase() &&
+            book.author.toLowerCase() === author.value.toLowerCase()
+  ).length > 0) {
+    alert('Book already exists.')
+  } else {
+    addBookToLibrary(title.value, author.value, +pages.value, completed.checked)
+  
+    title.value = ''
+    author.value = ''
+    pages.value = ''
+    completed.checked = false
+  
+    bootstrap.Modal.getInstance(newBookModal).hide()
+  
+    updateBookDisplay()
+    updateMenu()
+  }
 }
 
 function toggleComplete(e) {
@@ -327,20 +334,28 @@ function editBook(e) {
   const pages = document.getElementById(`pages-edit-${index}`)
   const completed = document.getElementById(`completed-edit-${index}`)
 
-  myLibrary[index].title = title.value
-  myLibrary[index].author = author.value
-  myLibrary[index].pages = +pages.value
-  myLibrary[index].read = completed.checked
-
-  title.value = ''
-  author.value = ''
-  pages.value = ''
-  completed.checked = false
-
-  bootstrap.Modal.getInstance(editBookModal).hide()
-
-  updateBookDisplay()
-  updateMenu()
+  if (myLibrary.filter(
+    (book, i) => book.title.toLowerCase() === title.value.toLowerCase() &&
+                book.author.toLowerCase() === author.value.toLowerCase() &&
+                i != index
+  ).length > 0) {
+    alert('Book already exists.')
+  } else {
+    myLibrary[index].title = title.value
+    myLibrary[index].author = author.value
+    myLibrary[index].pages = +pages.value
+    myLibrary[index].read = completed.checked
+  
+    title.value = ''
+    author.value = ''
+    pages.value = ''
+    completed.checked = false
+  
+    bootstrap.Modal.getInstance(editBookModal).hide()
+  
+    updateBookDisplay()
+    updateMenu()
+  }
 }
 
 function removeBook(e) {
