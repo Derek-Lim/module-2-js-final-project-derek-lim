@@ -1,10 +1,12 @@
 const myLibrary = []
 
-function Book(title, author, pages, read) {
-  this.title = title
-  this.author = author
-  this.pages = pages
-  this.read = read
+class Book {
+  constructor(title, author, pages, read) {
+    this.title = title
+    this.author = author
+    this.pages = pages
+    this.read = read
+  }
 }
 
 function addBookToLibrary(title, author, pages, read) {
@@ -386,8 +388,8 @@ function searchBooks() {
     const title = card.querySelector('.card-title').textContent
     const author = card.querySelector('.card-subtitle').textContent
     
-    if (title.toLowerCase().indexOf(text) !== -1 ||
-        author.toLowerCase().indexOf(text) !== -1) {
+    if (title.toLowerCase().indexOf(text.toLowerCase()) !== -1 ||
+        author.toLowerCase().indexOf(text.toLowerCase()) !== -1) {
       card.style.display = 'block'
     } else {
       card.style.display = 'none'
@@ -395,6 +397,11 @@ function searchBooks() {
   }
 
   filterBooks()
+}
+
+function clearSearchBar() {
+  const searchBar = document.getElementById('search-bar')
+  searchBar.value = ''
 }
 
 function updateActive(menu, e) {
@@ -432,11 +439,6 @@ function filterBooks() {
       cardsContainer.children[i].style.display = 'none'
     })
   }
-}
-
-function clearSearchBar() {
-  const searchBar = document.getElementById('search-bar')
-  searchBar.value = ''
 }
 
 function initialRender() {
@@ -482,7 +484,7 @@ function initialRender() {
     'C Programming Language',
     'Kernighan Brian W., Ritchie Dennis',
     279,
-    true
+    false
   )
   
   updateBookDisplay()
